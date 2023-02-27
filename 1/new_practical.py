@@ -444,11 +444,24 @@ polysemous_pl("stówa")
 # centym 0.5726915597915649
 # komunał 0.5709105730056763
 
-polysemous_pl("baba")
+# polysemous_pl("babka")
+# Tried "babka" ("woman" or a type of cake, but in the top 10 there were only words related to "woman")
 
 polysemous_pl("staw")
-
+# stawa 0.840743362903595
+# jeziorko 0.760422945022583
+# miednica 0.6800762414932251
+# rzepka 0.6719450354576111
+# niecka 0.6687400341033936
+# strumyk 0.6671221852302551
+# koryto 0.6663556694984436
+# sadzawka 0.6657816767692566
+# jezioro 0.6656040549278259
+# wzgórek 0.6646289229393005
 # ------------------
+
+# polysemous_pl("tepy")
+# not related words
 
 #################################
 # TODO: c)
@@ -471,8 +484,9 @@ synonyms_antonyms_pl(w1 = "cyfrowy", w2 = "elektroniczny", w3 = "analogowy")
 # Synonyms cyfrowy, elektroniczny have cosine distance: 0.21015697717666626
 # Antonyms cyfrowy, analogowy have cosine distance: 0.24363106489181519
 
-synonyms_antonyms_pl(w1 = "lśniacy", w2 = "błyszczący", w3 = "matowy")
-
+synonyms_antonyms_pl(w1 = "blyszczacy", w2 = "lsniacy", w3 = "matowy")
+# Synonyms blyszczacy, lsniacy have cosine distance: 0.4929726719856262
+# Antonyms blyszczacy, matowy have cosine distance: 0.860868439078331
 
 #################################
 # TODO: d)
@@ -494,12 +508,20 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('ojciec', 0.5779308676719666),
 #  ('rodzeństwo', 0.5768202543258667)]
 
-pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["ksiezniczka", "dziecko"], negative=["krolowa"]))
 
 pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["ksiezniczka", "dziecko"], negative=["krolowa"]))
+    positive=["lekarz", "kobieta"], negative=["mezczyzna"]))
 
+# [('pielęgniarka', 0.652389645576477),
+#  ('lekarka', 0.6262717247009277),
+#  ('osoba', 0.6237451434135437),
+#  ('chirurg', 0.6050892472267151),
+#  ('psychiatra', 0.5909774303436279),
+#  ('pacjent', 0.5898064374923706),
+#  ('ginekolog', 0.5640532970428467),
+#  ('akuszerka', 0.5627631545066833),
+#  ('dziewczę', 0.5559123754501343),
+#  ('logopeda', 0.5546327829360962)]
 
 #################################
 # TODO: e)
@@ -508,7 +530,34 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # Write your incorrect analogy exploration code here.
 
 pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["chirurg", "kobieta"], negative=["mezczyzna"]))
+    positive=["szpital", "nauczyciel"], negative=["lekarz"]))
+
+# [('pielęgniarka', 0.652389645576477),
+#  ('lekarka', 0.6262717247009277),
+#  ('osoba', 0.6237451434135437),
+#  ('chirurg', 0.6050892472267151),
+#  ('psychiatra', 0.5909774303436279),
+#  ('pacjent', 0.5898064374923706),
+#  ('ginekolog', 0.5640532970428467),
+#  ('akuszerka', 0.5627631545066833),
+#  ('dziewczę', 0.5559123754501343),
+#  ('logopeda', 0.5546327829360962)]
+
+pprint.pprint(wv_from_bin_pl.most_similar(
+    positive=["szef", "kobieta"], negative=["mezczyzna"]))
+
+# [('własika', 0.5678122639656067),
+#  ('agent', 0.5483713150024414),
+#  ('oficer', 0.5411549210548401),
+#  ('esperów', 0.5383270978927612),
+#  ('interpol', 0.5367037653923035),
+#  ('antyterrorystyczny', 0.5327680110931396),
+#  ('komisarz', 0.5326411128044128),
+#  ('europolu', 0.5274547338485718),
+#  ('bnd', 0.5271410346031189),
+#  ('pracownik', 0.5215375423431396)]
+
+# We don't have any term related to "szefowa" in the top 10
 
 # ------------------
 
@@ -520,7 +569,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # `negative` indicates the list of words to be most dissimilar from.
 # ------------------
 pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=['kobieta', 'szef'], negative=['mezczyzna']))
+    positive=['szef', 'kobieta'], negative=['mezczyzna']))
 
 # [('własika', 0.5678122639656067),
 #  ('agent', 0.5483713150024414),
@@ -547,13 +596,30 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('dyrektor', 0.5513691306114197),
 #  ('obowiazany', 0.5471130609512329)]
 
+# In the examples from f), we don't have any word related to the female form of words "szef", "prezes",
+# even though intuition tells us, this is what we should expect. Additionally, symmetric example:
+
+pprint.pprint(wv_from_bin_pl.most_similar(
+    positive=["prezeska", "mezczyzna"], negative=["kobieta"]))
+
+# [('czlonkiem', 0.6216989755630493),
+#  ('obowiazani', 0.5612116456031799),
+#  ('czlonek', 0.5500109791755676),
+#  ('prezes', 0.5379120111465454),
+#  ('wiceprezes', 0.5351985096931458),
+#  ('szczesliwa', 0.515707790851593),
+#  ('przewodniczacym', 0.514071524143219),
+#  ('wicedyrektor', 0.512302041053772),
+#  ('wyjasniona', 0.5115833878517151),
+#  ('zwykla', 0.5093945860862732)]
+
+
 #################################
 # TODO: g)
 # Independent Analysis of Bias in Word Vectors
 # ------------------
 
-pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=['kobieta', 'chirurg'], negative=['mezczyzna']))
+
 
 #################################
 # Section 3:
@@ -600,14 +666,17 @@ polysemous_en("squash")
 # ------------------
 # Write your synonym & antonym exploration code here.
 
-w1 = "happy"
-w2 = "cheerful"
-w3 = "sad"
-w1_w2_dist = wv_from_bin.distance(w1, w2)
-w1_w3_dist = wv_from_bin.distance(w1, w3)
+def synonyms_antonyms_en(w1, w2, w3):
+    w1_w2_dist = wv_from_bin.distance(w1, w2)
+    w1_w3_dist = wv_from_bin.distance(w1, w3)
 
-print("Synonyms {}, {} have cosine distance: {}".format(w1, w2, w1_w2_dist))
-print("Antonyms {}, {} have cosine distance: {}".format(w1, w3, w1_w3_dist))
+    print("Synonyms {}, {} have cosine distance: {}".format(w1, w2, w1_w2_dist))
+    print("Antonyms {}, {} have cosine distance: {}".format(w1, w3, w1_w3_dist))
+
+synonyms_antonyms_en(w1 = "happy", w2 = "cheerful", w3 = "sad")
+synonyms_antonyms_en(w1 = "digital", w2 = "electronic", w3 = "analog")
+synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
+
 
 #################################
 # TODO: d)
@@ -619,13 +688,19 @@ print("Antonyms {}, {} have cosine distance: {}".format(w1, w3, w1_w3_dist))
 pprint.pprint(wv_from_bin.most_similar(
     positive=["son", "woman"], negative=["man"]))
 
+pprint.pprint(wv_from_bin.most_similar(
+    positive=["japan", "hamburger"], negative=["usa"]))
+
 #################################
 # TODO: e)
 # Incorrect Analogy
 # ------------------
 # Write your incorrect analogy exploration code here.
 pprint.pprint(wv_from_bin.most_similar(
-    positive=["", ""], negative=[""]))
+    positive=["house", "bird"], negative=["human"]))
+
+pprint.pprint(wv_from_bin.most_similar(
+    positive=["sky", "grass"], negative=["blue"]))
 # ------------------
 
 
