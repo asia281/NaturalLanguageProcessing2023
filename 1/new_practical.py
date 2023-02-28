@@ -669,11 +669,20 @@ polysemous_en("bark")
 # frass 0.5140877366065979
 # barked 0.5108722448348999
 
-polysemous_en("wing")
+polysemous_en("")
 
 polysemous_en("dish")
 
-
+# dishes 0.7938355803489685
+# risotto 0.6626606583595276
+# casserole 0.6550886034965515
+# crab_rangoon 0.6336711645126343
+# pasta_dish 0.6292396187782288
+# lamb_biryani 0.6248414516448975
+# tartare_sauce 0.6178266406059265
+# pastry_crust 0.6157412528991699
+# giardiniera 0.6154837012290955
+# shrimp_appetizer 0.6145071387290955
 
 # ------------------
 
@@ -721,20 +730,40 @@ pprint.pprint(wv_from_bin.most_similar(
 #  ('sister', 0.697901725769043),
 #  ('grandson', 0.6924970746040344)]
 
-pprint.pprint(wv_from_bin.most_similar(
-    positive=["japan", "pizza"], negative=["usa"]))
 
 pprint.pprint(wv_from_bin.most_similar(
-    positive=["boat", "land"], negative=["water"]))
+    positive=["boss", "woman"], negative=["man"]))
+
+# [('bosses', 0.5522644519805908),
+#  ('manageress', 0.49151360988616943),
+#  ('exec', 0.45940810441970825),
+#  ('Manageress', 0.4559843838214874),
+#  ('receptionist', 0.4474116563796997),
+#  ('Jane_Danson', 0.44480547308921814),
+#  ('Fiz_Jennie_McAlpine', 0.4427576959133148),
+#  ('Coronation_Street_actress', 0.44275563955307007),
+#  ('supremo', 0.4409853219985962),
+#  ('coworker', 0.43986251950263977)]
 
 #################################
 # TODO: e)
 # Incorrect Analogy
 # ------------------
 # Write your incorrect analogy exploration code here.
-pprint.pprint(wv_from_bin.most_similar(
-    positive=["boss", "woman"], negative=["man"]))
 
+pprint.pprint(wv_from_bin.most_similar(
+    positive=["boat", "land"], negative=["water"]))
+
+# [('boats', 0.5301659107208252),
+#  ('fishing_boat', 0.5212045311927795),
+#  ('yacht', 0.508728563785553),
+#  ('sailboat', 0.489263117313385),
+#  ('catamaran', 0.4817970395088196),
+#  ('cabin_cruiser', 0.4778779447078705),
+#  ('speedboat', 0.4756109416484833),
+#  ('masted_sailboat', 0.4634605646133423),
+#  ('sloop', 0.4604802131652832),
+#  ('trawler', 0.4592331647872925)]
 
 pprint.pprint(wv_from_bin.most_similar(
     positive=["sky", "grass"], negative=["blue"]))
@@ -760,7 +789,7 @@ pprint.pprint(wv_from_bin.most_similar(
 # `negative` indicates the list of words to be most dissimilar from.
 # ------------------
 pprint.pprint(wv_from_bin.most_similar(
-    positive=['woman', 'chairman'], negative=['men']))
+    positive=['woman', 'head'], negative=['men']))
 
 
 
@@ -771,3 +800,14 @@ pprint.pprint(wv_from_bin.most_similar(
 
 pprint.pprint(wv_from_bin.most_similar(
     positive=['woman', 'solider'], negative=['men']))
+
+# [('soldier', 0.7221205830574036),
+#  ('serviceman', 0.5974410176277161),
+#  ('airman', 0.5473331809043884),
+#  ('Soldier', 0.5266920328140259),
+#  ('girl', 0.5174804925918579),
+#  ('paratrooper', 0.5063685178756714),
+#  ('Army_Reservist', 0.5004420876502991),
+#  ('National_Guardsman', 0.4948287010192871),
+#  ('guardsman', 0.48919495940208435),
+#  ('policewoman', 0.48758482933044434)]
