@@ -619,6 +619,8 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # Independent Analysis of Bias in Word Vectors
 # ------------------
 
+pprint.pprint(wv_from_bin_pl.most_similar(
+    positive=['kobieta', 'zolnierz'], negative=['mezczyzna']))
 
 
 #################################
@@ -656,7 +658,22 @@ def polysemous_en(word: str):
         print(key, similarity)
 
 polysemous_en("bark")
-polysemous_en("squash")
+# barks 0.6022706031799316
+# Pacific_yew_tree 0.5659282803535461
+# barking 0.5538278222084045
+# cork_oak_tree 0.5402646660804749
+# beetles_burrow 0.5370648503303528
+# barky 0.5280892252922058
+# cambium 0.5276377201080322
+# sapwood 0.5159558057785034
+# frass 0.5140877366065979
+# barked 0.5108722448348999
+
+polysemous_en("wing")
+
+polysemous_en("dish")
+
+
 
 # ------------------
 
@@ -674,8 +691,14 @@ def synonyms_antonyms_en(w1, w2, w3):
     print("Antonyms {}, {} have cosine distance: {}".format(w1, w3, w1_w3_dist))
 
 synonyms_antonyms_en(w1 = "happy", w2 = "cheerful", w3 = "sad")
+# Synonyms happy, cheerful have cosine distance: 0.6162261664867401
+# Antonyms happy, sad have cosine distance: 0.46453857421875
 synonyms_antonyms_en(w1 = "digital", w2 = "electronic", w3 = "analog")
+# Synonyms digital, electronic have cosine distance: 0.4748317003250122
+# Antonyms digital, analog have cosine distance: 0.4807000160217285
 synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
+# Synonyms shiny, glossy have cosine distance: 0.4870768189430237
+# Antonyms shiny, mat have cosine distance: 0.8636362105607986
 
 
 #################################
@@ -687,9 +710,22 @@ synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
 # Write your analogy exploration code here.
 pprint.pprint(wv_from_bin.most_similar(
     positive=["son", "woman"], negative=["man"]))
+# [('daughter', 0.8796941041946411),
+#  ('mother', 0.8246030211448669),
+#  ('niece', 0.7625203132629395),
+#  ('husband', 0.739037275314331),
+#  ('granddaughter', 0.7366384863853455),
+#  ('eldest_daughter', 0.7307103872299194),
+#  ('daughters', 0.7241971492767334),
+#  ('father', 0.7208905816078186),
+#  ('sister', 0.697901725769043),
+#  ('grandson', 0.6924970746040344)]
 
 pprint.pprint(wv_from_bin.most_similar(
-    positive=["japan", "hamburger"], negative=["usa"]))
+    positive=["japan", "pizza"], negative=["usa"]))
+
+pprint.pprint(wv_from_bin.most_similar(
+    positive=["boat", "land"], negative=["water"]))
 
 #################################
 # TODO: e)
@@ -697,10 +733,23 @@ pprint.pprint(wv_from_bin.most_similar(
 # ------------------
 # Write your incorrect analogy exploration code here.
 pprint.pprint(wv_from_bin.most_similar(
-    positive=["house", "bird"], negative=["human"]))
+    positive=["boss", "woman"], negative=["man"]))
+
 
 pprint.pprint(wv_from_bin.most_similar(
     positive=["sky", "grass"], negative=["blue"]))
+
+# [('vegetation', 0.45566555857658386),
+#  ('treetops', 0.4393109381198883),
+#  ('grasses', 0.43853452801704407),
+#  ('wheat_stubble', 0.43614476919174194),
+#  ('weeds', 0.4334176778793335),
+#  ('overhanging_branches', 0.42577505111694336),
+#  ('shrubbery', 0.42460083961486816),
+#  ('leaf_litter', 0.42425423860549927),
+#  ('undergrowth', 0.42417919635772705),
+#  ('trees', 0.41765254735946655)]
+
 # ------------------
 
 
@@ -711,13 +760,14 @@ pprint.pprint(wv_from_bin.most_similar(
 # `negative` indicates the list of words to be most dissimilar from.
 # ------------------
 pprint.pprint(wv_from_bin.most_similar(
-    positive=['woman', 'boss'], negative=['man']))
-print()
-pprint.pprint(wv_from_bin.most_similar(
-    positive=['man', 'boss'], negative=['woman']))
+    positive=['woman', 'chairman'], negative=['men']))
+
+
 
 #################################
 # TODO: g)
 # Independent Analysis of Bias in Word Vectors
 # ------------------
 
+pprint.pprint(wv_from_bin.most_similar(
+    positive=['woman', 'solider'], negative=['men']))
