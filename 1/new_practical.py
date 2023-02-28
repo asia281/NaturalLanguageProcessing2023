@@ -510,6 +510,19 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 
 
 pprint.pprint(wv_from_bin_pl.most_similar(
+    positive=["szpital", "nauczyciel"], negative=["lekarz"]))
+
+# ('szkoła', 0.7905541658401489),
+# ('sierociniec', 0.7628465294837952),
+# ('przedszkole', 0.730900228023529),
+# ('konwikt', 0.7190622687339783),
+# ('seminarium', 0.7073177099227905),
+# ('gimnazjum', 0.7053801417350769),
+# ('ochronka', 0.6808328628540039),
+# ('żłobek', 0.6739992499351501),
+# ('szkółka', 0.6706633567810059)]
+
+pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["lekarz", "kobieta"], negative=["mezczyzna"]))
 
 # [('pielęgniarka', 0.652389645576477),
@@ -523,25 +536,16 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('dziewczę', 0.5559123754501343),
 #  ('logopeda', 0.5546327829360962)]
 
+# For some reason "pielegniarka" is top1, even though from our intuition "lekarka" 
+# should be at the first place. It may be due to bias, but other examples suggest
+# it's just a coincidence.
+
 #################################
 # TODO: e)
 # Incorrect Analogy
 # ------------------
 # Write your incorrect analogy exploration code here.
 
-pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["szpital", "nauczyciel"], negative=["lekarz"]))
-
-# [('pielęgniarka', 0.652389645576477),
-#  ('lekarka', 0.6262717247009277),
-#  ('osoba', 0.6237451434135437),
-#  ('chirurg', 0.6050892472267151),
-#  ('psychiatra', 0.5909774303436279),
-#  ('pacjent', 0.5898064374923706),
-#  ('ginekolog', 0.5640532970428467),
-#  ('akuszerka', 0.5627631545066833),
-#  ('dziewczę', 0.5559123754501343),
-#  ('logopeda', 0.5546327829360962)]
 
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["szef", "kobieta"], negative=["mezczyzna"]))
@@ -557,7 +561,8 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('bnd', 0.5271410346031189),
 #  ('pracownik', 0.5215375423431396)]
 
-# We don't have any term related to "szefowa" in the top 10
+# We don't have any term related to "szefowa" in the top 10, it means that
+# "szefowa" doesn't appear in the similar context as "szef".
 
 # ------------------
 
@@ -597,21 +602,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('obowiazany', 0.5471130609512329)]
 
 # In the examples from f), we don't have any word related to the female form of words "szef", "prezes",
-# even though intuition tells us, this is what we should expect. Additionally, symmetric example:
-
-pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["prezeska", "mezczyzna"], negative=["kobieta"]))
-
-# [('czlonkiem', 0.6216989755630493),
-#  ('obowiazani', 0.5612116456031799),
-#  ('czlonek', 0.5500109791755676),
-#  ('prezes', 0.5379120111465454),
-#  ('wiceprezes', 0.5351985096931458),
-#  ('szczesliwa', 0.515707790851593),
-#  ('przewodniczacym', 0.514071524143219),
-#  ('wicedyrektor', 0.512302041053772),
-#  ('wyjasniona', 0.5115833878517151),
-#  ('zwykla', 0.5093945860862732)]
+# even though intuition tells us, this is what we should expect. 
 
 
 #################################
@@ -622,6 +613,16 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=['kobieta', 'zolnierz'], negative=['mezczyzna']))
 
+#[('ludzie', 0.6067951917648315),
+# ('dziewczyna', 0.5997867584228516),
+# ('mężczyzna', 0.5818526744842529),
+# ('żołnierz', 0.5648460984230042),
+# ('dziewczę', 0.5419468879699707),
+# ('chłopiec', 0.5342115163803101),
+# ('my', 0.5148516893386841),
+# ('on', 0.5142670273780823),
+# ('murzyn', 0.5128365159034729),
+# ('wojownik', 0.5077145099639893)]
 
 #################################
 # Section 3:
@@ -669,7 +670,6 @@ polysemous_en("bark")
 # frass 0.5140877366065979
 # barked 0.5108722448348999
 
-polysemous_en("")
 
 polysemous_en("dish")
 
