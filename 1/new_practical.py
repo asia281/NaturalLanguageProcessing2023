@@ -624,6 +624,9 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # ('murzyn', 0.5128365159034729),
 # ('wojownik', 0.5077145099639893)]
 
+# h) The source of bias in word vector
+# 
+
 #################################
 # Section 3:
 # English part
