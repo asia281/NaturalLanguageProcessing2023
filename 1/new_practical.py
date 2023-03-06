@@ -357,6 +357,24 @@ words = [
 plot_normalized(pl_corpus, words)
 plot_unnormalized(pl_corpus, words)
 
+# What clusters together in 2-dimensional embedding space? 
+
+# For normalized plot, we got two clusters: one for word "sztuka" and another one for the rest of the words.
+# For unnormalized we got three clusters: first for "sztuka", second for "literatura"
+# the third one for "spiewaczka", "obywatel" and "poeta". It makes a lot of sense, becase
+# in the third cluster we have words related to the human. 
+
+# What doesn’t cluster together that you might think should have?
+
+# It's counterintuitive that for both plots "sztuka" and "literatura" are quite far away from 
+# each other. 
+
+
+# TruncatedSVD returns U × S, so we normalize the returned vectors in the second plot, so that all the vectors will appear around the unit circle. Is normalization necessary?
+
+# The normalization removes information from vectors and plot looks worse than the one unnormalized.
+# The clusters are worse in normalized.png.
+
 #################################
 # Section 2:
 #################################
@@ -624,8 +642,14 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # ('murzyn', 0.5128365159034729),
 # ('wojownik', 0.5077145099639893)]
 
+# I computed top10 words for kobieta + zolnierz - mezczyzna. The result consist of
+# words related to "kobieta", but there's no word related to female "version"
+# of zolnierz.
+
 # h) The source of bias in word vector
-# 
+# The bias is produced by word vectors in dataset that is used for training.
+# Some examples are probably associated with jobs where the ration between
+# number of employees of each gender is not 1:1.
 
 #################################
 # Section 3:
@@ -720,6 +744,17 @@ synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
 
 # ------------------
 # Write your analogy exploration code here.
+
+pprint.pprint(wv_from_bin.most_similar(
+    positive=["hospital", "teacher"], negative=["doctor"]))
+
+
+
+
+pprint.pprint(wv_from_bin_pl.most_similar(
+    positive=["doctor", "woman"], negative=["man"]))
+
+
 pprint.pprint(wv_from_bin.most_similar(
     positive=["son", "woman"], negative=["man"]))
 # [('daughter', 0.8796941041946411),
@@ -814,3 +849,10 @@ pprint.pprint(wv_from_bin.most_similar(
 #  ('National_Guardsman', 0.4948287010192871),
 #  ('guardsman', 0.48919495940208435),
 #  ('policewoman', 0.48758482933044434)]
+
+
+# We see differences; in c) we got very similar results, with even more visible results.
+# In e)
+# In f)
+# In g) we also can see bias very similar to the Polish version, 
+# but top10 words also consists of word 'policewoman', that is a little bit related.  
