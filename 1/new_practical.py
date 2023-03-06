@@ -748,12 +748,32 @@ synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
 pprint.pprint(wv_from_bin.most_similar(
     positive=["hospital", "teacher"], negative=["doctor"]))
 
+#[('elementary', 0.6052683591842651),
+# ('school', 0.5762953758239746),
+# ('teachers', 0.576140284538269),
+# ('classroom', 0.5456913113594055),
+# ('School', 0.5349582433700562),
+# ('Elementary_School', 0.5344264507293701),
+# ('Elementary', 0.5304893255233765),
+# ('Teacher', 0.5241969227790833),
+# ('Intermediate_School', 0.5221602320671082),
+# ('Middle_School', 0.5163268446922302)]
 
 
 
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["doctor", "woman"], negative=["man"]))
 
+#[('evangelicus', 0.6470223665237427),
+# ('zhivago', 0.6365563869476318),
+# ('yibangin', 0.6158789396286011),
+# ('assignation', 0.6059062480926514),
+# ('nurses', 0.6008003950119019),
+# ('mellifluus', 0.6006983518600464),
+# ('doctora', 0.5915331840515137),
+# ('doctors', 0.5862175226211548),
+# ('hottie', 0.5817180871963501),
+# ('advocate', 0.5791268944740295)]
 
 pprint.pprint(wv_from_bin.most_similar(
     positive=["son", "woman"], negative=["man"]))
@@ -829,7 +849,16 @@ pprint.pprint(wv_from_bin.most_similar(
 pprint.pprint(wv_from_bin.most_similar(
     positive=['woman', 'head'], negative=['men']))
 
-
+#[('chair', 0.42928388714790344),
+# ('staffer', 0.38825470209121704),
+# ('Raqeeb_Abdel_Latif', 0.3881603479385376),
+# ('muttered_softly', 0.3822100758552551),
+# ('Patricia_Smillie_Scavelli', 0.37924641370773315),
+# ('tenderly_stroking', 0.3776439428329468),
+# ('severe_laceration', 0.37712281942367554),
+# ('businesswoman', 0.37389394640922546),
+# ('receptionist', 0.37111473083496094),
+# ('suffered_puncture_wound', 0.37067875266075134)]
 
 #################################
 # TODO: g)
