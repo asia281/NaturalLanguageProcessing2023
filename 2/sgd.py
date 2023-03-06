@@ -90,6 +90,8 @@ def sgd(f, x0, step, iterations, postprocessing=None, useSaved=False,
 
         loss = None
         ### YOUR CODE HERE
+        
+        
 
         ### END YOUR CODE
 
