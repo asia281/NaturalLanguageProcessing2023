@@ -440,6 +440,21 @@ M_reduced = reduce_to_k_dim(M, k=2)
 words = ["sztuka", "śpiewaczka", "literatura", "poeta", "obywatel"]
 plot_embeddings(M_reduced, word2Ind, words, "reduced.png")
 
+# What clusters together in 2-dimensional embedding space? 
+# It's not obvious question, we don't see any exact clusters, vector words 
+# are quite far away from another one. I guess that again, we can cluster poeta and obywatel,
+# probably with śpiewaczka, but śpiewaczka is further from poeta and obywatel.
+
+# What doesn’t cluster together that you might think should have?
+# Because I don't see exact clusters, I think that literally nothing clustered
+# properly.
+
+# How is the plot different from the one generated earlier from the co-occurrence matrix?
+# Meaning of words is more visible, the closest word to spiewaczka is poeta,
+# and the closest one to sztuka is literatura. 
+# It wasn't visible in the previous plots.
+
+
 #################################
 # TODO: b)
 # Polysemous Words
