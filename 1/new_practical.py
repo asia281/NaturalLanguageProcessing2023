@@ -895,7 +895,8 @@ pprint.pprint(wv_from_bin.most_similar(
 
 
 # We see differences; in c) and d) we got very similar results, with even more visible results.
-# In e) some words didn't have bias (such as man : woman ::boss : ?), even thogh in polish version they had. It means that english corpus is probably more diversed.
+# In e) some words didn't have bias (such as man : woman ::boss : ?), even thogh in polish version they had. It means that english corpus is probably more diversed, but on the other hand have
+# bunch of "glued" words that are creating a lot of noise.
 # In f) we see some women present in top10, as well as businesswoman as top8,
 # so it's less biased than polish version.
 # In g) we can see bias very similar to the Polish version, 
