@@ -493,8 +493,9 @@ polysemous_pl("staw")
 # wzgórek 0.6646289229393005
 # ------------------
 
-# polysemous_pl("tepy")
-# not related words
+
+# Many words didn't work, because they are usually used in onluy one context (such as babka),
+# or are not very popular in polish language.
 
 #################################
 # TODO: c)
@@ -521,6 +522,14 @@ synonyms_antonyms_pl(w1 = "blyszczacy", w2 = "lsniacy", w3 = "matowy")
 # Synonyms blyszczacy, lsniacy have cosine distance: 0.4929726719856262
 # Antonyms blyszczacy, matowy have cosine distance: 0.860868439078331
 
+synonyms_antonyms_pl(w1 = "silny", w2 = "mocny", w3 = "slaby")
+# Synonyms silny, mocny have cosine distance: 0.23193776607513428
+# Antonyms silny, slaby have cosine distance: 0.18360120058059692
+
+# silny appears in a quite similar context to slaby,
+# and probably in less similar context to mocny,
+# that may be the reason why the distance between silny and slaby is smaller 
+
 #################################
 # TODO: d)
 # Solving Analogies with Word Vectors
@@ -528,6 +537,7 @@ synonyms_antonyms_pl(w1 = "blyszczacy", w2 = "lsniacy", w3 = "matowy")
 
 # ------------------
 # Write your analogy exploration code here.
+# kobieta:mezczyzna :: syn : (corka)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["syn", "kobieta"], negative=["mezczyzna"]))
 # [('córka', 0.6928777098655701),
@@ -542,6 +552,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('rodzeństwo', 0.5768202543258667)]
 
 
+# nauczyciel:lekarz :: szpital : (szkola)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["szpital", "nauczyciel"], negative=["lekarz"]))
 
@@ -555,6 +566,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # ('żłobek', 0.6739992499351501),
 # ('szkółka', 0.6706633567810059)]
 
+# kobieta : mezczyzna :: lekarz : (lekarka)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["lekarz", "kobieta"], negative=["mezczyzna"]))
 
@@ -579,7 +591,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # ------------------
 # Write your incorrect analogy exploration code here.
 
-
+# mezczyzna:szef :: kobieta : (szefowa?)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["szef", "kobieta"], negative=["mezczyzna"]))
 
@@ -636,13 +648,14 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 
 # In the examples from f), we don't have any word related to the female form of words "szef", "prezes",
 # even though intuition tells us, this is what we should expect. 
+# It's possible that in a context usually male version appears. 
 
 
 #################################
 # TODO: g)
 # Independent Analysis of Bias in Word Vectors
 # ------------------
-
+# mezczyzna:kobieta :: zolnierz : ?
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=['kobieta', 'zolnierz'], negative=['mezczyzna']))
 
@@ -759,7 +772,7 @@ synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
 
 # ------------------
 # Write your analogy exploration code here.
-
+# doctor:hospital :: teacher:school 
 pprint.pprint(wv_from_bin.most_similar(
     positive=["hospital", "teacher"], negative=["doctor"]))
 
@@ -775,20 +788,6 @@ pprint.pprint(wv_from_bin.most_similar(
 # ('Middle_School', 0.5163268446922302)]
 
 
-
-pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["doctor", "woman"], negative=["man"]))
-
-#[('evangelicus', 0.6470223665237427),
-# ('zhivago', 0.6365563869476318),
-# ('yibangin', 0.6158789396286011),
-# ('assignation', 0.6059062480926514),
-# ('nurses', 0.6008003950119019),
-# ('mellifluus', 0.6006983518600464),
-# ('doctora', 0.5915331840515137),
-# ('doctors', 0.5862175226211548),
-# ('hottie', 0.5817180871963501),
-# ('advocate', 0.5791268944740295)]
 
 pprint.pprint(wv_from_bin.most_similar(
     positive=["son", "woman"], negative=["man"]))
@@ -895,8 +894,9 @@ pprint.pprint(wv_from_bin.most_similar(
 #  ('policewoman', 0.48758482933044434)]
 
 
-# We see differences; in c) we got very similar results, with even more visible results.
-# In e)
-# In f)
-# In g) we also can see bias very similar to the Polish version, 
+# We see differences; in c) and d) we got very similar results, with even more visible results.
+# In e) some words didn't have bias (such as man : woman ::boss : ?), even thogh in polish version they had. It means that english corpus is probably more diversed.
+# In f) we see some women present in top10, as well as businesswoman as top8,
+# so it's less biased than polish version.
+# In g) we can see bias very similar to the Polish version, 
 # but top10 words also consists of word 'policewoman', that is a little bit related.  
