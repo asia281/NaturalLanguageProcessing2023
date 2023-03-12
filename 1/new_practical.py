@@ -440,6 +440,21 @@ M_reduced = reduce_to_k_dim(M, k=2)
 words = ["sztuka", "śpiewaczka", "literatura", "poeta", "obywatel"]
 plot_embeddings(M_reduced, word2Ind, words, "reduced.png")
 
+# What clusters together in 2-dimensional embedding space? 
+# It's not obvious question, we don't see any exact clusters, vector words 
+# are quite far away from another one. I guess that again, we can cluster poeta and obywatel,
+# probably with śpiewaczka, but śpiewaczka is further from poeta and obywatel.
+
+# What doesn’t cluster together that you might think should have?
+# Because I don't see exact clusters, I think that literally nothing clustered
+# properly.
+
+# How is the plot different from the one generated earlier from the co-occurrence matrix?
+# Meaning of words is more visible, the closest word to spiewaczka is poeta,
+# and the closest one to sztuka is literatura. 
+# It wasn't visible in the previous plots.
+
+
 #################################
 # TODO: b)
 # Polysemous Words
@@ -478,8 +493,9 @@ polysemous_pl("staw")
 # wzgórek 0.6646289229393005
 # ------------------
 
-# polysemous_pl("tepy")
-# not related words
+
+# Many words didn't work, because they are usually used in onluy one context (such as babka),
+# or are not very popular in polish language.
 
 #################################
 # TODO: c)
@@ -506,6 +522,14 @@ synonyms_antonyms_pl(w1 = "blyszczacy", w2 = "lsniacy", w3 = "matowy")
 # Synonyms blyszczacy, lsniacy have cosine distance: 0.4929726719856262
 # Antonyms blyszczacy, matowy have cosine distance: 0.860868439078331
 
+synonyms_antonyms_pl(w1 = "silny", w2 = "mocny", w3 = "slaby")
+# Synonyms silny, mocny have cosine distance: 0.23193776607513428
+# Antonyms silny, slaby have cosine distance: 0.18360120058059692
+
+# silny appears in a quite similar context to slaby,
+# and probably in less similar context to mocny,
+# that may be the reason why the distance between silny and slaby is smaller 
+
 #################################
 # TODO: d)
 # Solving Analogies with Word Vectors
@@ -513,6 +537,7 @@ synonyms_antonyms_pl(w1 = "blyszczacy", w2 = "lsniacy", w3 = "matowy")
 
 # ------------------
 # Write your analogy exploration code here.
+# kobieta:mezczyzna :: syn : (corka)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["syn", "kobieta"], negative=["mezczyzna"]))
 # [('córka', 0.6928777098655701),
@@ -527,6 +552,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 #  ('rodzeństwo', 0.5768202543258667)]
 
 
+# nauczyciel:lekarz :: szpital : (szkola)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["szpital", "nauczyciel"], negative=["lekarz"]))
 
@@ -540,6 +566,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # ('żłobek', 0.6739992499351501),
 # ('szkółka', 0.6706633567810059)]
 
+# kobieta : mezczyzna :: lekarz : (lekarka)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["lekarz", "kobieta"], negative=["mezczyzna"]))
 
@@ -564,7 +591,7 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 # ------------------
 # Write your incorrect analogy exploration code here.
 
-
+# mezczyzna:szef :: kobieta : (szefowa?)
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=["szef", "kobieta"], negative=["mezczyzna"]))
 
@@ -621,13 +648,14 @@ pprint.pprint(wv_from_bin_pl.most_similar(
 
 # In the examples from f), we don't have any word related to the female form of words "szef", "prezes",
 # even though intuition tells us, this is what we should expect. 
+# It's possible that in a context usually male version appears. 
 
 
 #################################
 # TODO: g)
 # Independent Analysis of Bias in Word Vectors
 # ------------------
-
+# mezczyzna:kobieta :: zolnierz : ?
 pprint.pprint(wv_from_bin_pl.most_similar(
     positive=['kobieta', 'zolnierz'], negative=['mezczyzna']))
 
@@ -744,15 +772,21 @@ synonyms_antonyms_en(w1 = "shiny", w2 = "glossy", w3 = "mat")
 
 # ------------------
 # Write your analogy exploration code here.
-
+# doctor:hospital :: teacher:school 
 pprint.pprint(wv_from_bin.most_similar(
     positive=["hospital", "teacher"], negative=["doctor"]))
 
+#[('elementary', 0.6052683591842651),
+# ('school', 0.5762953758239746),
+# ('teachers', 0.576140284538269),
+# ('classroom', 0.5456913113594055),
+# ('School', 0.5349582433700562),
+# ('Elementary_School', 0.5344264507293701),
+# ('Elementary', 0.5304893255233765),
+# ('Teacher', 0.5241969227790833),
+# ('Intermediate_School', 0.5221602320671082),
+# ('Middle_School', 0.5163268446922302)]
 
-
-
-pprint.pprint(wv_from_bin_pl.most_similar(
-    positive=["doctor", "woman"], negative=["man"]))
 
 
 pprint.pprint(wv_from_bin.most_similar(
@@ -829,7 +863,16 @@ pprint.pprint(wv_from_bin.most_similar(
 pprint.pprint(wv_from_bin.most_similar(
     positive=['woman', 'head'], negative=['men']))
 
-
+#[('chair', 0.42928388714790344),
+# ('staffer', 0.38825470209121704),
+# ('Raqeeb_Abdel_Latif', 0.3881603479385376),
+# ('muttered_softly', 0.3822100758552551),
+# ('Patricia_Smillie_Scavelli', 0.37924641370773315),
+# ('tenderly_stroking', 0.3776439428329468),
+# ('severe_laceration', 0.37712281942367554),
+# ('businesswoman', 0.37389394640922546),
+# ('receptionist', 0.37111473083496094),
+# ('suffered_puncture_wound', 0.37067875266075134)]
 
 #################################
 # TODO: g)
@@ -851,8 +894,10 @@ pprint.pprint(wv_from_bin.most_similar(
 #  ('policewoman', 0.48758482933044434)]
 
 
-# We see differences; in c) we got very similar results, with even more visible results.
-# In e)
-# In f)
-# In g) we also can see bias very similar to the Polish version, 
+# We see differences; in c) and d) we got very similar results, with even more visible results.
+# In e) some words didn't have bias (such as man : woman ::boss : ?), even thogh in polish version they had. It means that english corpus is probably more diversed, but on the other hand have
+# bunch of "glued" words that are creating a lot of noise.
+# In f) we see some women present in top10, as well as businesswoman as top8,
+# so it's less biased than polish version.
+# In g) we can see bias very similar to the Polish version, 
 # but top10 words also consists of word 'policewoman', that is a little bit related.  
