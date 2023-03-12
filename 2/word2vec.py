@@ -64,22 +64,19 @@ def naive_softmax_loss_and_gradient(
     ### Please use the provided softmax function (imported earlier in this file)
     ### This numerically stable implementation helps you avoid issues pertaining
     ### to integer overflow. 
-    
-    
+
+    # P(O=o|C=c):
     y_ = softmax(np.dot(outsideVectors, centerWordVec))
-    
-    
-    # J_ns = - logP(O=o|C=c) = -log y_
-    loss = -np.log(y_)
-    
-    one_hot = np.zeros_like(loss)
+
+    # J_naive_softmax = - log(O=o|C=c):
+    loss = - np.log(y_[outsideWordIdx])
+
+    # One-hot encoded vector:
+    one_hot = np.zeros(y_.shape)
     one_hot[outsideWordIdx] = 1
-    
-    #  (dJ / dvc) = 
-    gradCenterVec = np.dot(y_ - one_hot, centerWordVec)
-    
-    #  (dJ / dU)
-    gradOutsideVecs = np.outer(y_ - one_hot, outsideVectors)
+
+    gradCenterVec = np.dot(y_ - one_hot, outsideVectors)
+    gradOutsideVecs = np.outer(y_ - one_hot, centerWordVec)
     
 
     ### END YOUR CODE
@@ -128,18 +125,17 @@ def neg_sampling_loss_and_gradient(
     ### YOUR CODE HERE
 
     ### Please use your implementation of sigmoid in here.
-    y_ = sigmoid(np.dot(outsideVectors[outsideWordIdx], centerWordVec))
     y_neg = []
+    gradCenterVec = 0
+    gradOutsideVecs = np.zeros(outsideVectors.shape)
     
-    for idx in negSampleWordIndices:
+    for idx in negSampleWordIndices + [outsideWordIdx]:
         y_neg.append(sigmoid(np.dot(outsideVectors[idx], centerWordVec)))
+        gradOutsideVecs[idx] += np.dot(1 - y_neg[-1], centerWordVec)
+        gradCenterVec += np.dot(1 - y_neg[-1], outsideVectors[idx])
         
         
-        
-    loss = -np.log(y_) + -np.sum(np.log(y_neg))
-    
-    
-    
+    loss = np.sum(np.log(y_neg))
     
     ### END YOUR CODE
 
