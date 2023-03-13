@@ -125,18 +125,18 @@ def neg_sampling_loss_and_gradient(
     ### YOUR CODE HERE
 
     ### Please use your implementation of sigmoid in here.
-    y_hat = sigmoid(np.dot(outsideVectors[outsideWordIdx], centerWordVec))
-    loss = -np.log(y_hat)
+    y_ = sigmoid(np.dot(outsideVectors[outsideWordIdx], centerWordVec))
+    loss = -np.log(y_)
 
-    gradCenterVec = np.dot(y_hat - 1, outsideVectors[outsideWordIdx])
+    gradCenterVec = np.dot(y_ - 1, outsideVectors[outsideWordIdx])
     gradOutsideVecs = np.zeros(outsideVectors.shape)
-    gradOutsideVecs[outsideWordIdx] = np.dot(y_hat - 1, centerWordVec)
+    gradOutsideVecs[outsideWordIdx] = np.dot(y_ - 1, centerWordVec)
 
     for w_k in indices[1:]:
-        y_k_hat = sigmoid(-np.dot(outsideVectors[w_k], centerWordVec))
-        loss -= np.log(y_k_hat)
-        gradOutsideVecs[w_k] += np.dot(1 - y_k_hat, centerWordVec)
-        gradCenterVec += np.dot(1 - y_k_hat, outsideVectors[w_k])
+        y_k_ = sigmoid(-np.dot(outsideVectors[w_k], centerWordVec))
+        loss -= np.log(y_k_)
+        gradOutsideVecs[w_k] += np.dot(1 - y_k_, centerWordVec)
+        gradCenterVec += np.dot(1 - y_k_, outsideVectors[w_k])
     
     ### END YOUR CODE
 
