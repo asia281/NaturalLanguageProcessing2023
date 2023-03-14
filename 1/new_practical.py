@@ -862,7 +862,7 @@ pprint.pprint(wv_from_bin.most_similar(
 # ------------------
 pprint.pprint(wv_from_bin.most_similar(
     positive=['woman', 'head'], negative=['men']))
-
+    
 #[('chair', 0.42928388714790344),
 # ('staffer', 0.38825470209121704),
 # ('Raqeeb_Abdel_Latif', 0.3881603479385376),
