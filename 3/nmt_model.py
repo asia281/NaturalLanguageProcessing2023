@@ -147,7 +147,7 @@ class NMT(nn.Module):
         # - Before you can apply the encoder, you need to apply the `pack_padded_sequence` function to X.
         X_padded = pack_padded_sequence(X, source_lengths)
         # - After you apply the encoder, you need to apply the `pad_packed_sequence` function to enc_hiddens.
-        unpadded = pad_packed_sequence(self.encoder(X_padded)).
+        enc_hiddens = pad_packed_sequence(self.encoder(X_padded)).reshape((b, src_len, -1))
         # - Note that the shape of the tensor returned by the encoder is (src_len b, h*2) and we want to
         # return a tensor of shape (b, src_len, h*2) as `enc_hiddens`.
         # 3. Compute `dec_init_state` = (init_decoder_hidden, init_decoder_cell):
@@ -162,6 +162,9 @@ class NMT(nn.Module):
         # Apply the c_projection layer to this in order to compute init_decoder_cell.
         # This is c_0^{dec} in the PDF. Here b = batch size, h = hidden size
         ###
+        init_decoder_hidden = self.h_projection(torch.cat())
+        init_decoder_cell = self.c_projection()
+        dec_init_state` = (init_decoder_hidden, init_decoder_cell)
         # See the following docs, as you may need to use some of the following functions in your implementation:
         # Pack the padded sequence X before passing to the encoder:
         # https://pytorch.org/docs/stable/nn.html#torch.nn.utils.rnn.pack_padded_sequence
