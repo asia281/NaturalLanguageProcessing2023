@@ -28,10 +28,10 @@ def pad_sents(sents, pad_token):
 
     # YOUR CODE HERE
 
-    max_len = np.max(len(sents))
+    max_len = np.max([len(sent) for sent in sents])
 
     for sent in sents:
-        to_pad = pad_token * (max_len - len(sent))
+        to_pad = [pad_token] * (max_len - len(sent))
         sents_padded.append(sent + to_pad)
 
     # END YOUR CODE
