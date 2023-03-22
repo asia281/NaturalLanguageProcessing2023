@@ -221,7 +221,6 @@ class NMT(nn.Module):
         # where b = batch size, src_len = maximum source length, h = hidden size.
         # This is applying W_{attProj} to h^enc, as described in the PDF.
         enc_hiddens_proj = self.att_projection(enc_hiddens)
-        print(enc_hiddens_proj.shape, enc_hiddens.shape)
         # 2. Construct tensor `Y` of target sentences with shape (tgt_len, b, e)
         # using the target model embeddings.
         # where tgt_len = maximum target sentence length, b = batch size, e = embedding size.
