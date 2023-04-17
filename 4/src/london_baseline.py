@@ -3,7 +3,7 @@
 # Hint: Make use of existing code.
 # Your solution here should only be a few lines.
 
-#from run import evaluate_places
+from utils import evaluate_places
 import argparse
     
 
@@ -18,6 +18,6 @@ preds = []
 for _ in open(path, 'r'):
     preds.append('London')
 print("hihi") 
-total, correct = 0, 1#evaluate_places(path, preds)
+total, correct = evaluate_places(path, preds)
 
 print('London baseline accuracy: %.2f' % (correct / total))
