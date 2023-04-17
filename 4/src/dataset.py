@@ -174,12 +174,9 @@ class CharCorruptionDataset(Dataset):
         # TODO [part e]: see detailed specification above.
         data = self.data[idx]
         trunc_size = random.uniform(4, int(self.block_size*7/8))
-        if trunc_size < len(data):
-          trunc = data[:trunc_size]
-        else:
-          trunc = data + [self.PAD_CHAR] * (trunc_size - len(data))
+        trunc_size = min(len(data[idx]), trunc_size)
         
-        masked_content_size = random.normal(trunc_size / 4, )
+        masked_content_size = random.uniform(1, trunc_size / 2 - 1)
         prefix_size = random.uniform(0, trunc_size - masked_content_size)
         prefix = trunc[:prefix_size]
         masked_content = trunc[prefix_size:(prefix_size+masked_content_size)]
@@ -190,6 +187,9 @@ class CharCorruptionDataset(Dataset):
         
         x = masked_string[:-1]
         y = masked_string[1:]
+        
+        x = torch.tensor([self.stoi[c] for c in x], dtype=torch.long)
+        y = torch.tensor([self.stoi[c] for c in y], dtype=torch.long)
         return x, y
 
 """

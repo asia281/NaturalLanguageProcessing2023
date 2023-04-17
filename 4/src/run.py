@@ -125,7 +125,6 @@ if args.function == 'pretrain':
     trainer.train()
     torch.save(gpt_model.state_dict(), args.writing_params_path)
 
-    raise NotImplementedError
 elif args.function == 'finetune':
     assert args.writing_params_path is not None
     assert args.finetune_corpus_path is not None
