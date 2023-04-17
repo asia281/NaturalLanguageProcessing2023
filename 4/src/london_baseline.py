@@ -10,7 +10,7 @@ def london_preds(path: str):
     preds = []
     for _ in open(args.eval_path, 'r'):
         preds.append('London')
-    total, correct = evaluate_places(args.eval_copus_path, preds)
+    total, correct = evaluate_places(args.evals_path, preds)
 
     print('London baseline accuracy: %.2f' % (correct / total))
 
