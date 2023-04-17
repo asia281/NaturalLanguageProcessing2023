@@ -174,7 +174,8 @@ class CharCorruptionDataset(Dataset):
         # TODO [part e]: see detailed specification above.
         data = self.data[idx]
         trunc_size = random.uniform(4, int(self.block_size*7/8))
-        trunc_size = min(len(data[idx]), trunc_size)
+        trunc_size = min(len(data), trunc_size)
+        trunc = data[:trunc_size]
         
         masked_content_size = random.uniform(1, trunc_size / 2 - 1)
         prefix_size = random.uniform(0, trunc_size - masked_content_size)
