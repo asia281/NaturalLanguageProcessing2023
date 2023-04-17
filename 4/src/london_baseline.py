@@ -6,18 +6,20 @@
 from run import evaluate_places
 import argparse
 
-def london_preds(path: str):
-    preds = []
-    for _ in open(args.eval_path, 'r'):
-        preds.append('London')
-    print("hihi") 
-    total, correct = evaluate_places(args.evals_path, preds)
 
-    print('London baseline accuracy: %.2f' % (correct / total))
+    
 
 argp = argparse.ArgumentParser()
 argp.add_argument('--eval_path',
     help="Path of the data to evaluate model on", default=None)
 print(argp) 
 args = argp.parse_args()
-london_preds(args.eval_path)
+path = args.eval_path
+
+preds = []
+for _ in open(path, 'r'):
+    preds.append('London')
+print("hihi") 
+total, correct = evaluate_places(path, preds)
+
+print('London baseline accuracy: %.2f' % (correct / total))
