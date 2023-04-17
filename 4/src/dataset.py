@@ -177,7 +177,7 @@ class CharCorruptionDataset(Dataset):
         trunc_size = min(len(data), trunc_size)
         trunc = data[:trunc_size]
         
-        masked_content_size = random.randint(1, trunc_size // 2)
+        masked_content_size = random.randint(min(1, trunc_size // 2), trunc_size // 2)
         prefix_size = random.randint(0, trunc_size - masked_content_size)
         prefix = trunc[:prefix_size]
         masked_content = trunc[prefix_size:(prefix_size+masked_content_size)]
