@@ -173,11 +173,11 @@ class CharCorruptionDataset(Dataset):
     def __getitem__(self, idx):
         # TODO [part e]: see detailed specification above.
         data = self.data[idx]
-        trunc_size = random.uniform(4, int(self.block_size*7/8))
+        trunc_size = random.randint(4, int(self.block_size*7/8))
         trunc_size = min(len(data), trunc_size)
         trunc = data[:trunc_size]
         
-        masked_content_size = random.uniform(1, trunc_size / 2 - 1)
+        masked_content_size = random.randint(1, trunc_size / 2 - 1)
         prefix_size = random.uniform(0, trunc_size - masked_content_size)
         prefix = trunc[:prefix_size]
         masked_content = trunc[prefix_size:(prefix_size+masked_content_size)]
