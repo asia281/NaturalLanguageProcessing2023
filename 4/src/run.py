@@ -14,8 +14,10 @@ from tqdm import tqdm
 random.seed(0)
 
 import dataset
-from mingptdemo.mingpt import model, utils
 import trainer
+import sys
+sys.path.append('mingptdemo')
+from mingpt import model, utils
 
 
 def evaluate_places(filepath, predicted_places):
@@ -86,6 +88,9 @@ Don't change above here; write your code below
 
 if args.variant == 'vanilla':
     # TODO [part c]: Define some model here
+    # create model with hyperparameters mconf
+    gpt_model = model.GPT(mconf)
+
 
 # From here on, your code should be identical independent of which
 # variant (vanilla or synthesizer) has been chosen.
@@ -108,10 +113,23 @@ if args.function == 'pretrain':
     #     warmup_tokens=512*20
     #     final_tokens=200*len(pretrain_dataset)*block_size
     #     num_workers=4
+    train_config = trainer.TrainerConfig(
+        max_epochs=650,
+        batch_size=128,
+        learning_rate=6e-3,
+        lr_decay=True,
+        warmup_tokens=512*20,
+        final_tokens=200*len(pretrain_dataset)*block_size,
+        num_workers=4)
+    trainer = trainer.Trainer(gpt_model, pretrain_dataset, None, train_config)
+    trainer.train()
+    torch.save(gpt_model.state_dict(), args.writing_params_path)
+
     raise NotImplementedError
 elif args.function == 'finetune':
     assert args.writing_params_path is not None
     assert args.finetune_corpus_path is not None
+
     # TODO [part c] [part f]:
     # - Given:
     #     1. A finetuning corpus specified in args.finetune_corpus_path
@@ -140,14 +158,43 @@ elif args.function == 'finetune':
     #         warmup_tokens=512*20
     #         final_tokens=200*len(pretrain_dataset)*block_size
     #         num_workers=4
+    if args.reading_params_path is None:
+        fconf = trainer.TrainerConfig(
+            max_epochs=75,
+            batch_size=256,
+            learning_rate=6e-4,
+            lr_decay=True,
+            warmup_tokens=512 * 20,
+            final_tokens=200 * len(pretrain_dataset) * block_size,
+            num_workers=4)
+    else:
+        fconf = trainer.TrainerConfig(
+            max_epochs=10,
+            batch_size=256,
+            learning_rate=6e-4,
+            lr_decay=True,
+            warmup_tokens=512 * 20,
+            final_tokens=200 * len(pretrain_dataset) * block_size,
+            num_workers=4)
+        gpt_model.load_state_dict(torch.load(args.reading_params_path))
+        gpt_model = gpt_model.to(device)
+
+
+    finetune_text = open(args.finetune_corpus_path).read()
+    finetune_dataset = dataset.CharCorruptionDataset(finetune_text, block_size)
+    gpt_trainer = trainer.Trainer(gpt_model, finetune_dataset, None, fconf)
+    gpt_trainer.train()
+
+    torch.save(gpt_model.state_dict(), args.writing_params_path)
+
 elif args.function == 'evaluate':
     assert args.outputs_path is not None
     assert args.reading_params_path is not None
     assert args.eval_corpus_path is not None
-    # gpt_model.load_state_dict(torch.load(args.reading_params_path, map_location=torch.device('cpu')))
+    gpt_model.load_state_dict(torch.load(args.reading_params_path, map_location=torch.device('cpu')))
     gpt_model.load_state_dict(torch.load(args.reading_params_path))
     gpt_model = gpt_model.to(device)
-    # gpt_model.eval()
+    gpt_model.eval()
     correct = 0
     total = 0
     with open(args.outputs_path, 'w') as fout:
