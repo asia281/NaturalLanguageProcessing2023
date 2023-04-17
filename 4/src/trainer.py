@@ -39,7 +39,6 @@ class TrainerConfig:
             setattr(self, k, v)
 
 class Trainer:
-
     def __init__(self, model, train_dataset, test_dataset, config):
         self.model = model
         self.train_dataset = train_dataset
