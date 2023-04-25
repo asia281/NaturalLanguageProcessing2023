@@ -17,7 +17,6 @@ path = args.eval_path
 preds = []
 for _ in open(path, 'r'):
     preds.append('London')
-print("hihi") 
-total, correct = evaluate_places(path, preds)
 
+total, correct = evaluate_places(path, preds)
 print('London baseline accuracy: %.2f' % (correct / total))
